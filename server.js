@@ -42,11 +42,12 @@ app.get('/env.js', (req, res) => {
 });
 
 // POST経由でGPS情報を受信
+
 app.post('/gps', (req, res) => {
-    const gpsData = req.body;  // { id: "A", lat: ..., lon: ... }
+    const gpsData = req.body;
     console.log('Received GPS:', gpsData);
 
-    io.emit('gps-update', gpsData);  // 端末ID付きでフロントエンドに送信
+    io.emit('gps-update', gpsData);
     res.sendStatus(200);
 });
 

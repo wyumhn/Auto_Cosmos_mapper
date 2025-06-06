@@ -6,6 +6,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const devices = {};
 const arrowLayerGroup = L.layerGroup().addTo(map);
 
+// 受信履歴を保存する配列
+// const gpsHistory = [];
+// const gpsHistoryBody = document.getElementById('gps-history-body');
+
 //
 // 色別アイコン生成
 //
@@ -45,18 +49,45 @@ function generatePopupContent(id, lat, lon) {
     `;
 }
 
-const socket = io();
+//
+// 履歴リスト
+//
 
-socket.on('gps-update', data => {
-    const { id, lat, lon } = data;
+function updateGpsHistoryList() {
 
+    let tableRowsHtml = '';
+
+    for (let i = 0; i < gpsHistory.length; i++) {
+        const entry = gpsHistory[i];
+        const time = new Date(entry.timestamp).toLocaleTimeString();
+        tableRowsHtml += `
+            <div class="gps-history-grid">
+                <div class="gps-history-grid-child gps-history-grid-time">${time}</div>
+                <div class="gps-history-grid-child gps-history-grid-id">${entry.id}</div>
+                <div class="gps-history-grid-child gps-history-grid-lat">${entry.lat.toFixed(6)}</div>
+                <div class="gps-history-grid-child gps-history-grid-lon">${entry.lon.toFixed(6)}</div>
+            </div>
+        `;
+    }
+
+    gpsHistoryBody.innerHTML = tableRowsHtml;
+}
+
+//
+// デバイスマーカーリスト
+//
+
+function updateOrCreateDevice(id, lat, lon, icon) {
+    // 初回のみマーカー作成
     if (!devices[id]) {
-        const icon = iconMap[id] || iconMap.default;
         const marker = L.marker([lat, lon], { icon }).addTo(map);
         marker.bindPopup(generatePopupContent(id, lat, lon));
 
         const path = [[lat, lon]];
-        const polyline = L.polyline(path, { color: icon.options.iconUrl.includes('red') ? 'red' : 'blue' }).addTo(map);
+        const polyline = L.polyline(path, {
+            color: icon.options.iconUrl.includes('red') ? 'red' :
+                    icon.options.iconUrl.includes('blue') ? 'blue' : 'green'
+        }).addTo(map);
 
         devices[id] = {
             marker,
@@ -64,13 +95,50 @@ socket.on('gps-update', data => {
             polyline
         };
     } else {
+        // マーカーとポップアップ更新
         devices[id].marker.setLatLng([lat, lon]);
         if (devices[id].marker.isPopupOpen()) {
             devices[id].marker.getPopup().setContent(generatePopupContent(id, lat, lon));
         }
+
         devices[id].path.push([lat, lon]);
         devices[id].polyline.setLatLngs(devices[id].path);
     }
+}
+
+function extractDeviceInfo(devices) {
+    const simplified = {};
+
+    Object.entries(devices).forEach(([id, dev]) => {
+        const latlng = dev.marker.getLatLng();
+
+        // アイコンURLから色名を抽出
+        const iconUrl = dev.marker.options.icon?.options?.iconUrl || '';
+        const colorMatch = iconUrl.match(/marker-icon-2x-([a-z]+)\.png$/);
+        const color = colorMatch ? colorMatch[1] : 'unknown';
+
+        simplified[id] = {
+            id,
+            lat: latlng.lat,
+            lon: latlng.lng,
+            color
+        };
+    });
+
+    return simplified;
+}
+
+const socket = io();
+
+socket.on('gps-update', data => {
+
+    const { id, lat, lon } = data;
+
+    /* gpsHistory.push({ id, lat, lon, timestamp: Date.now() }); */
+    /* updateGpsHistoryList(); */
+
+    const icon = iconMap[id] || iconMap.default;
+    updateOrCreateDevice(id, lat, lon, icon);
 
     const markerA = devices['A']?.marker;
     const markerB = devices['B']?.marker;
@@ -81,10 +149,6 @@ socket.on('gps-update', data => {
 
     const latlngA = markerA.getLatLng();
     const latlngB = markerB.getLatLng();
-
-    //
-    // 距離ラベルの表示
-    //
 
     const distance = latlngA.distanceTo(latlngB);
     const midLat = (latlngA.lat + latlngB.lat) / 2;
@@ -98,10 +162,6 @@ socket.on('gps-update', data => {
             iconAnchor: [50, 10]
         })
     }).addTo(arrowLayerGroup);
-
-    //
-    // 2点間矢印の表示
-    //
 
     const line = L.polyline([latlngA, latlngB], { color: 'purple' }).addTo(arrowLayerGroup);
 
@@ -123,4 +183,29 @@ socket.on('gps-update', data => {
         ]
     }).addTo(arrowLayerGroup);
 
+    updateOrCreateDevice(id, lat, lon, icon);
+    const simplified = extractDeviceInfo(devices);
+    renderDeviceList(simplified);
 });
+
+
+let userMarker = null;
+
+if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(
+        position => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+            updateOrCreateDevice('あなた', userLat, userLon, iconMap.default);
+        },
+        error => {
+            console.error('ユーザー位置の追跡に失敗しました: ', error);
+        },
+        {
+            enableHighAccuracy: true,
+            maximumAge: 1000,
+            timeout: 5000
+        }
+    );
+}
+

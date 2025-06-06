@@ -2,19 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>iASL-GPS</title>
+    <title>Auto_Cosmos_Monitor</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div id="map"></div>
-
+    <div id="map">
+    </div>
+    <div id="open-menu">
+        <a href="#side-bar">≡</a>
+    </div>
+    <div id="side-bar">
+        <div class="monitor-data" id="monitor-data-ssh">
+            <h3>現在の接続</h3>
+            <div id="device_list"></div>
+        </div>
+        <a id="close-menu" href="##"> </a>
+    </div>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/1.1.0/leaflet.polylineDecorator.min.js" integrity="sha512-2oK40N5b+8g4Fhp1rfdtmNaroXsh7tFN4OY6++9lB/Hb+uLQWmn0SSAXvnQfbn8BP8qtpri2YQLaFGpyzKUHow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Socket.IO クライアント -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="/env.js"></script>
-    <script src="/index.js"></script>
+    <script src="/gnss-mapper.js"></script>
+    <script src="/monitor.js"></script>
 </body>
 </html>

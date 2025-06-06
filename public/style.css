@@ -1,4 +1,18 @@
-/* main elements */
+/* メイン要素 */
+
+:root {
+    --box-shadow-thick: 0 0px 6px rgba(0, 0, 0, 0.2);
+    --box-shadow-thin: 0 0px 2px rgba(0, 0, 0, 0.2);
+    --popup-fader-color: 0, 0, 0, 0.2;
+    --general-blur: 0.15rem;
+    /* Sidebar Vs */
+    --sidebar-width: 18rem;
+    --sidebar-width-on-mobile: 16rem;
+    /* Sidebar Colors */
+    --sidebar-background-color: 250, 250, 250;
+    --sidebar-text-color: 20, 20, 20;
+    --sidebar-border-color: 215, 215, 215;
+}
 
 body, html {
     margin: 0;
@@ -8,12 +22,94 @@ body, html {
 #map {
     height: 100%;
     width: 100%;
+    z-index: 0;
+}
+
+/* サイドバー */
+
+#open-menu a {
+    position: absolute;
+    bottom: 0.5em;
+    left: 0.5em;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: san-serif;
+    font-size: 30px;
+    font-weight: 600;
+    width: 50px;
+    height: 50px;
+    line-height: 0.9em;
+    border: 3px solid gainsboro;
+    box-shadow: 3px 3px 3px rgba(200, 200, 200, 0.6);
+    background-color: #fff;
+    border-radius: 9999px;
+    color: #333;
+}
+
+#open-menu a:is(a, a.visited, a.newpage):is(*, :hover, :active, :focus, :focus-within) {
+    text-decoration: none;
+}
+
+#side-bar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: calc(-1 * var(--sidebar-width));
+    margin: 0;
+    padding-left: 0.5rem;
+    transition: left 0.25s ease 0.125s;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 9;
+    background: rgba(var(--sidebar-background-color));
+    scrollbar-width: thin;
+    border-right: solid 0.1333333333rem rgba(var(--sidebar-border-color));
+    box-sizing: border-box;
+}
+
+#side-bar:target {
+    display: block;
+    left: 0;
+    width: var(--sidebar-width);
+    margin: 0;
+    border: 1px solid #dedede;
+}
+
+#side-bar > * {
+    position: relative;
+    z-index: 10;
+}
+
+#side-bar #close-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: block;
+    height: 100vh;
+    width: 100%;
+    transition: opacity 0.25s ease 0.125s, width 0.25s ease 0.125s;
+    z-index: -1;
+    pointer-events: none;
+    background: rgba(var(--popup-fader-color));
+    opacity: 0;
+    -webkit-backdrop-filter: blur(var(--general-blur));
+            backdrop-filter: blur(var(--general-blur));
+}
+
+#side-bar:target #close-menu {
+    opacity: 100%;
+    pointer-events: auto;
+    width: calc(100% - min(var(--sidebar-width), 100% - 3rem));
 }
 
 /* デバイスラベル */
 
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
-    box-shadow: 0 0px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow-thick);
 }
 
 .leaflet-popup-content > div h3 {
@@ -50,7 +146,7 @@ body, html {
     border-radius: 4px;
     font-size: 12px;
     text-align: center;
-    box-shadow: 0 0 2px rgba(0,0,0,0.25);
+    box-shadow: var(--box-shadow-thin);
     pointer-events: none;
     transition: background-color .3s ease-in, box-shadow .3s ease-in;
     top: -45px;
@@ -59,5 +155,67 @@ body, html {
 
 .distance-label:hover {
     background-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+    box-shadow: var(--box-shadow-thin);
 }
+
+/* 受信履歴 */
+
+#history {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: var(--box-shadow-thick);
+    height: 600px;
+    overflow-y: hidden;
+    width: 500px;
+    z-index: 1000;
+}
+
+.gps-history-head-child {
+    background-color: whitesmoke;
+}
+
+#gps-history-head {
+    overflow: auto;
+    scrollbar-gutter: stable;
+}
+
+#gps-history-body {
+    max-height: 400px;
+}
+
+.device-list {
+    border-bottom: 2px solid gainsboro;
+}
+
+.device-entry h4 {
+    background-color: whitesmoke;
+    border: 2px solid gainsboro;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-left: 0.5rem;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: max-content max-content 2fr;
+}
+
+.data-grid div:last-child {
+    border-right: 2px solid gainsboro;
+    padding-right: 0.5rem;
+}
+
+.semicolon {
+    padding: 0 1rem;
+}
+
+.data-grid div:first-child {
+    border-left: 2px solid gainsboro;
+    padding-left: 0.5rem;
+    min-width: 2.5rem;
+}
+
