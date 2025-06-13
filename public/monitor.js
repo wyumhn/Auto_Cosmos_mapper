@@ -42,3 +42,14 @@ function renderDeviceList(devices, containerId = 'device_list') {
 
     container.innerHTML = html;
 }
+
+function renderTopicList() {
+    topicListElement.innerHTML = '';
+
+    const sortedTopics = Array.from(receivedTopics).sort();
+    sortedTopics.forEach(topic => {
+        const li = document.createElement('li');
+        li.textContent = topic;
+        topicListElement.appendChild(li);
+    });
+}

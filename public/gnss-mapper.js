@@ -188,6 +188,21 @@ socket.on('gps-update', data => {
     renderDeviceList(simplified);
 });
 
+const receivedTopics = new Set();
+const topicListElement = document.getElementById('topic-list');
+
+socket.onAny((eventName, data) => {
+    console.log(`イベント '${eventName}' を受信:`, data);
+
+    if (data && typeof data.topic === 'string') {
+        if (!receivedTopics.has(data.topic)) {
+            receivedTopics.add(data.topic);
+            renderTopicList();
+        }
+    }
+});
+
+
 
 let userMarker = null;
 

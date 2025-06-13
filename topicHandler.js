@@ -2,6 +2,7 @@
 const topicToEventMap = {
   '/gps/fix': 'gps-update',
   '/imu/data': 'imu-update',
+  '/chatter': 'chatter-update',
 };
 
 function handleTopicData(io, data) {
@@ -18,7 +19,10 @@ function handleTopicData(io, data) {
     io.emit(eventName, data);
     console.log(`データ転送: トピック '${data.topic}' -> イベント '${eventName}'`);
   } else {
-    /* console.warn(`未定義のトピックを受信しました: ${data.topic}`); */
+    const dynamicEventName = data.topic.substring(1).replace(/\//g, '-') + '-update';
+
+    io.emit(dynamicEventName, data);
+    console.log(`動的イベント生成: トピック '${data.topic}' -> イベント '${dynamicEventName}'`);
   }
 }
 
