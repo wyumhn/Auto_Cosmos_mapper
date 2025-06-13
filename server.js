@@ -19,7 +19,7 @@ wss.on('connection', ws => {
         console.log(`WebSocketメッセージ受信: ${message}`);
         try {
             const data = JSON.parse(message);
-            io.emit('gps-update', data);
+            handleTopicData(io, data);
         } catch (err) {
             console.error('JSON parse error:', err);
         }
@@ -39,16 +39,6 @@ app.get('/env.js', (req, res) => {
         window.START_X = ${process.env.START_X};
         window.START_Y = ${process.env.START_Y};
     `);
-});
-
-// POST経由でGPS情報を受信
-
-app.post('/gps', (req, res) => {
-    const gpsData = req.body;
-    console.log('Received GPS:', gpsData);
-
-    io.emit('gps-update', gpsData);
-    res.sendStatus(200);
 });
 
 // WebSocket接続時の処理
