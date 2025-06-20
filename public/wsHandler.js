@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (data && typeof data.topic === 'string') {
             const topic = data.topic;
+            const raw = data.raw;
 
             if (!receivedTopics.has(topic)) {
                 receivedTopics.add(topic);
-                renderTopicList(receivedTopics ,topicListElement);
+                renderTopicList(receivedTopics, topicListElement, raw);
             }
             else {
-                updateTopicTimestamp(topic);
+                updateTopicTimestamp(topic, raw);
             }
         }
     });

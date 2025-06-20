@@ -7,13 +7,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div id="body-wrap">
         <div id="header">
             <img src="logo.jpg">
-            <span>Calypso Monitoring System</span>
+            <span>Calypso-Monitor</span>
         </div>
         <div id="grid-wrap-wrap">
             <div id="msg-grid" class="grid-wrap">
@@ -83,11 +84,14 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/1.1.0/leaflet.polylineDecorator.min.js" integrity="sha512-2oK40N5b+8g4Fhp1rfdtmNaroXsh7tFN4OY6++9lB/Hb+uLQWmn0SSAXvnQfbn8BP8qtpri2YQLaFGpyzKUHow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <!-- Socket.IO クライアント -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="/env.js"></script>
     <script src="/gpsMapUpdater.js"></script>
     <script src="/monitorUpdater.js"></script>
     <script src="/wsHandler.js"></script>
+    <script src="/innerContent.js"></script>
 </body>
 </html>

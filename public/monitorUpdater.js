@@ -59,7 +59,7 @@ function getTime() {
     return time;
 }
 
-function renderTopicList(topics, container) {
+function renderTopicList(topics, container, raw) {
     if (!container) {
         console.error("renderTopicList was called with a null container for topics:", topics);
         return;
@@ -68,7 +68,17 @@ function renderTopicList(topics, container) {
     const sortedTopics = Array.from(topics).sort();
     const time = getTime()
     const html = `
-        ${sortedTopics.map(topic => `<li id="topic-${topic}"><span>${topic}</span><span>${time}</span></li>`).join('')}
+        ${sortedTopics.map(topic => `
+            <li id="topic-${topic}">
+                <span>${topic}</span><span>${time}</span>
+                <a href="#"></a>
+                <div id="topic-${topic}-info" class="modal-box">
+                    <button class="close-btn">&times;</button>
+                    <h3>${topic}</h3>
+                    <pre id="topic-${topic}-raw"><code class="language-yaml"></code></pre>
+                </div>
+            </li>
+            `).join('')}
     `;
     container.innerHTML = html;
 }
@@ -77,9 +87,12 @@ function renderTopicList(topics, container) {
  * @param {string} topic
  */
 
-function updateTopicTimestamp(topic) {
+function updateTopicTimestamp(topic, raw) {
     const topicId = `topic-${topic}`;
     const topicElement = document.getElementById(topicId);
+
+    const topicRawId = `topic-${topic}-raw`;
+    const topicRawElement = document.getElementById(topicRawId);
 
     if (topicElement) {
 
@@ -95,7 +108,18 @@ function updateTopicTimestamp(topic) {
         topicElement.addEventListener('animationend', () => {
             topicElement.classList.remove('topic-highlight');
         }, { once: true });
+
     }
+
+    if (topicRawElement) {
+        const codeElement = topicRawElement.querySelector('code');
+        if (codeElement) {
+            codeElement.textContent = raw;
+            hljs.highlightElement(codeElement);
+        }
+
+    }
+
 }
 
 function updateImage(height, width, encoding, imageData, container) {

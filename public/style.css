@@ -56,6 +56,7 @@ body, html {
     grid-template-rows: auto;
     border: 0.16rem solid rgb(233, 233, 233);
     margin: 0.25rem;
+    border-radius: 0.75rem;
 }
 
 #misc-grid {
@@ -315,9 +316,61 @@ body, html {
 }
 
 #topic-list li {
+    position: relative;
     border-bottom: 0.2rem solid #dedede;
     display: flex;
     justify-content: space-between;
+}
+
+#topic-list li a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+}
+
+.modal-box {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    margin-left: 1rem;
+    width: 25rem;
+    background-color: white;
+    border: 0.16rem solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    padding: 1rem;
+    z-index: 15;
+}
+
+.modal-box.is-visible {
+    display: block;
+}
+
+.modal-box h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    border-bottom: 0.16rem solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.modal-box .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.modal-box code {
+    max-height: 50rem;
+    max-width: 23rem;
+    overflow: auto;
 }
 
 @keyframes flash-green {
