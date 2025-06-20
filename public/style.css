@@ -19,6 +19,44 @@ body, html {
     height: 100%;
 }
 
+#body-wrap {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    height: 100%;
+    width: 100%;
+}
+
+.grid-wrap {
+    display: grid;
+    grid-template-rows: auto;
+    border: 0.16rem solid rgb(233, 233, 233);
+    margin: 0.25rem;
+}
+
+#misc-grid {
+    grid-template-rows: 3fr 2fr;
+}
+
+#image-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.grid {
+    position: relative;
+    border: 0.16rem solid rgb(180, 180, 180);
+    margin: 0.25rem;
+}
+
+.grid-header {
+    position: absolute;
+    right: 0;
+    background: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 10;
+}
+
 #map {
     height: 100%;
     width: 100%;
@@ -250,3 +288,4 @@ body, html {
 .topic-highlight {
     animation: flash-green 2s ease-out;
 }
+

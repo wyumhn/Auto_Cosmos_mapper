@@ -7,8 +7,45 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <div id="map">
+    <div id="body-wrap">
+        <div id="msg-grid" class="grid-wrap">
+            <div id="topic-grid" class="grid">
+                <span class="grid-header">トピックリスト</span>
+                <div id="topic-data">
+                    <ul id="topic-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="misc-grid" class="grid-wrap">
+            <div id="map-grid" class="grid">
+                <span class="grid-header">GPSデータ</span>
+                <div id="map">
+                </div>
+            </div>
+            <div id="imu-data" class="grid">
+                <span class="grid-header">IMUデータ</span>
+            </div>
+        </div>
+        <div id="image-grid" class="grid-wrap">
+            <div id="flir-camera-grid" class="grid">
+                <span class="grid-header">RGBカメラ</span>
+            </div>
+            <div id="thermo-camera-grid" class="grid">
+                <span class="grid-header">サーモカメラ</span>
+            </div>
+            <div id="sonar-grid" class="grid">
+                <span class="grid-header">ソナーカメラ</span>
+            </div>
+            <div id="microphone-grid" class="grid">
+                <span class="grid-header">マイクロフォン</span>
+            </div>
+            <div id="event-camera-grid" class="grid">
+                <span class="grid-header">イベントカメラ</span>
+            </div>
+        </div>
     </div>
+    <!--
     <div id="open-menu">
         <a href="#side-bar">≡</a>
     </div>
@@ -16,7 +53,6 @@
         <div id="topic-data">
         <h3>トピックリスト</h3>
             <ul id="topic-list">
-                <!-- ここにトピックが動的に追加されます -->
             </ul>
         </div>
         <div class="monitor-data" id="monitor-data-ssh">
@@ -24,7 +60,7 @@
             <div id="device_list"></div>
         </div>
         <a id="close-menu" href="##"> </a>
-    </div>
+    </div>-->
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/1.1.0/leaflet.polylineDecorator.min.js" integrity="sha512-2oK40N5b+8g4Fhp1rfdtmNaroXsh7tFN4OY6++9lB/Hb+uLQWmn0SSAXvnQfbn8BP8qtpri2YQLaFGpyzKUHow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
