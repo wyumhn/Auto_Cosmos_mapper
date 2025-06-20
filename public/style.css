@@ -219,3 +219,34 @@ body, html {
     min-width: 2.5rem;
 }
 
+
+/* トピックリスト */
+
+#topic-list {
+    list-style-type: none;
+    margin-block-start: 0em;
+    padding-inline-start: 0.2rem;
+}
+
+#topic-list li {
+    border-bottom: 0.2rem solid #dedede;
+    display: flex;
+    justify-content: space-between;
+}
+
+@keyframes flash-green {
+
+    from {
+        background-color: #54ce58;
+        border-bottom: 0.2rem solid #1c800f;
+    }
+
+    to {
+        background-color: transparent;
+        border-bottom: 0.2rem solid #dedede;
+    }
+}
+
+.topic-highlight {
+    animation: flash-green 2s ease-out;
+}
