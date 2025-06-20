@@ -50,11 +50,15 @@ body, html {
 
 .grid-header {
     position: absolute;
+    padding: 0.2rem 1rem;
     right: 0;
+    z-index: 10;
     background: white;
     font-size: 0.8rem;
     font-weight: 700;
-    z-index: 10;
+    border-bottom-left-radius: 1rem;
+    border-bottom: 0.16rem solid rgb(180, 180, 180);
+    border-left: 0.16rem solid rgb(180, 180, 180);
 }
 
 #map {
