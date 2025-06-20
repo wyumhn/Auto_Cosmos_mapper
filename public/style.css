@@ -88,6 +88,14 @@ body, html {
     border-left: 0.16rem solid rgb(180, 180, 180);
 }
 
+.image-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .image-wrapper img {
     max-width: 250px;
     max-height: 250px;
