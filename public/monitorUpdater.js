@@ -97,3 +97,34 @@ function updateTopicTimestamp(topic) {
         }, { once: true });
     }
 }
+
+function updateImage(height, width, encoding, imageData, container) {
+
+    if (!container) {
+        console.error(`id="${container}" の要素が見つかりません。`);
+        return; // コンテナがなければ処理を中断
+    }
+    // 1. 画像のフォーマットを決定
+    //    Pythonハンドラで圧縮された場合は'jpeg'が送られてくるので、それを優先
+    //    それ以外の場合は、一般的なPNGとして扱う
+    const imageFormat = (encoding === 'jpeg') ? 'jpeg' : 'png';
+
+    // 2. ブラウザが画像を認識できる「Data URI」形式の文字列を作成
+    const imageUrl = `data:image/${imageFormat};base64,${imageData}`;
+
+    // 更新
+    let imgElement = container.querySelector('img');
+
+    if (imgElement) {
+        imgElement.src = imageUrl;
+    } else {
+        imgElement = document.createElement('img');
+        imgElement.src = imageUrl;
+        imgElement.alt = 'ROS Image Stream';
+
+        imgElement.style.width = '100%';
+        imgElement.style.height = 'auto';
+        imgElement.style.display = 'block';
+        container.appendChild(imgElement);
+    }
+}

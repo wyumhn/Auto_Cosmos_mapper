@@ -29,6 +29,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*
     *
+    * 画像情報の更新
+    *
+    */
+
+    socket.on('flir-camera-update', data => {
+        const { height, width, encoding, data: imageData } = data;
+        const container = document.getElementById('flir-camera');
+
+        updateImage(height, width, encoding, imageData, container);
+    });
+
+    socket.on('sonar-update', data => {
+        const { height, width, encoding, data: imageData } = data;
+        const container = document.getElementById('sonar-camera');
+
+        updateImage(height, width, encoding, imageData, container);
+    });
+
+    socket.on('thermal-camera-update', data => {
+        const { height, width, encoding, data: imageData } = data;
+        const container = document.getElementById('thermo-camera');
+
+        updateImage(height, width, encoding, imageData, container);
+    });
+
+
+    /*
+    *
     * GPS情報の更新（マーカーを地図上に追加）
     *
     */
