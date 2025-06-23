@@ -31,6 +31,7 @@ body, html {
     display: flex;
     height: 3rem;
     border-bottom: 0.16rem solid rgb(189 189 189);
+    user-select: none;
 }
 
 #header img {
@@ -81,12 +82,16 @@ body, html {
     right: 0;
     z-index: 10;
     background: white;
-    font-size: 0.8rem;
-    font-weight: 700;
     border-top-right-radius: 0.5rem;
     border-bottom-left-radius: 1rem;
     border-bottom: 0.16rem solid rgb(180, 180, 180);
     border-left: 0.16rem solid rgb(180, 180, 180);
+    font-size: 0.8rem;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    user-select: none;
 }
 
 .image-wrapper {
@@ -130,6 +135,7 @@ body, html {
     background-color: #fff;
     border-radius: 9999px;
     color: #333;
+    user-select: none;
 }
 
 #open-menu a:is(a, a.visited, a.newpage):is(*, :hover, :active, :focus, :focus-within) {
@@ -242,6 +248,16 @@ body, html {
     box-shadow: var(--box-shadow-thin);
 }
 
+/* その他マップ */
+
+.leaflet-control-zoom {
+    user-select: none;
+}
+
+.leaflet-control-attribution {
+    user-select: none;
+}
+
 /* 受信履歴 */
 
 #history {
@@ -320,6 +336,14 @@ body, html {
     border-bottom: 0.2rem solid #dedede;
     display: flex;
     justify-content: space-between;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+#topic-list span {
+    user-select: none;
 }
 
 #topic-list li a {
@@ -328,12 +352,13 @@ body, html {
     left: 0;
     height:100%;
     width: 100%;
+    user-select: none;
 }
 
 .modal-box {
     display: none;
     position: absolute;
-    top: 0;
+    top: -1rem;
     left: 100%;
     margin-left: 1rem;
     width: 25rem;
@@ -345,32 +370,60 @@ body, html {
     z-index: 15;
 }
 
+.modal-box::after {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    top: 0.7rem;
+    left: -0.65rem;
+    content: " ";
+    background: white;
+    border-left: 0.16rem solid #ccc;
+    border-bottom: 0.16rem solid #ccc;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 16;
+}
+
 .modal-box.is-visible {
     display: block;
 }
 
 .modal-box h3 {
     margin-top: 0;
-    font-size: 1rem;
     border-bottom: 0.16rem solid #eee;
     padding-bottom: 0.5rem;
+    font-size: 1rem;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    user-select: none;
 }
 
 .modal-box .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.4rem;
+    right: 0.5rem;
     cursor: pointer;
     border: none;
     background: none;
-    font-size: 20px;
+    font-size: 2rem;
     line-height: 1;
+    user-select: none;
 }
 
 .modal-box code {
     max-height: 50rem;
     max-width: 23rem;
     overflow: auto;
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    border: 0.2rem solid #8b8b8b;
 }
 
 @keyframes flash-green {

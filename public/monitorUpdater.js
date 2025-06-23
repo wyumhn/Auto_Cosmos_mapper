@@ -115,6 +115,7 @@ function updateTopicTimestamp(topic, raw) {
         const codeElement = topicRawElement.querySelector('code');
         if (codeElement) {
             codeElement.textContent = raw;
+            delete codeElement.dataset.highlighted;
             hljs.highlightElement(codeElement);
         }
 
