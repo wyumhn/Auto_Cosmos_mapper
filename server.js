@@ -18,11 +18,11 @@ wss.on('connection', ws => {
     console.log("WebSocket（3001）経由での接続を受けました");
 
     ws.on('message', message => {
-        const messageString = message.toString();
+        // const messageString = message.toString();
         console.log(`WebSocketメッセージ受信: ${message}`);
         try {
-            const data = JSON.parse(message);
-            data.raw_message = messageString;
+            // const data = JSON.parse(message);
+            // data.raw_message = messageString;
             handleTopicData(io, data);
         } catch (err) {
             console.error('JSON parse error:', err);
