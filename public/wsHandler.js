@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (data && typeof data.topic === 'string') {
             const topic = data.topic;
-            const raw = data.raw;
+            const raw = data.raw_message;
 
             if (!receivedTopics.has(topic)) {
                 receivedTopics.add(topic);

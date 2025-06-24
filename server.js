@@ -16,10 +16,13 @@ const wss = new WebSocket.Server({ port: 3001 }, () => {
 
 wss.on('connection', ws => {
     console.log("WebSocket（3001）経由での接続を受けました");
+    const messageString = message.toString();
+
     ws.on('message', message => {
         console.log(`WebSocketメッセージ受信: ${message}`);
         try {
             const data = JSON.parse(message);
+            data.raw_message = messageString;
             handleTopicData(io, data);
         } catch (err) {
             console.error('JSON parse error:', err);
