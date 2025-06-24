@@ -481,4 +481,15 @@ body, html {
             "msg misc"
             "image image";
     }
+
+    #topic-list > li > span {
+        font-size: 7.5px;
+    }
+
+    .modal-box {
+        display: none;
+        position: absolute;
+        left: 60%;
+        width: 16rem;
+    }
 }
