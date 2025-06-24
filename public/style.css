@@ -25,13 +25,18 @@ body, html {
     grid-template-rows: 3rem 1fr;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 #header {
+    position: sticky;
+    top: 0rem;
     display: flex;
     height: 3rem;
     border-bottom: 0.16rem solid rgb(189 189 189);
     user-select: none;
+    background-color: white;
+    z-index: 20;
 }
 
 #header img {
@@ -349,7 +354,7 @@ body, html {
     font-style: normal;
 }
 
-#topic-list span {
+#topic-list > li > span {
     user-select: none;
 }
 
@@ -454,6 +459,10 @@ body, html {
 /* for smartphone */
 
 @media only screen and (max-width: 800px) {
+    #body-wrap {
+        overflow: unset;
+    }
+
     #grid-wrap-wrap {
         grid-template-columns: 1fr 3fr;
         grid-template-rows: 1fr 1fr;
