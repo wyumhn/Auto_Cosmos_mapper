@@ -21,7 +21,7 @@ wss.on('connection', ws => {
         // const messageString = message.toString();
         console.log(`WebSocketメッセージ受信: ${message}`);
         try {
-            // const data = JSON.parse(message);
+            const data = JSON.parse(message);
             // data.raw_message = messageString;
             handleTopicData(io, data);
         } catch (err) {
