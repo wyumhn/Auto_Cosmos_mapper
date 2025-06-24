@@ -119,8 +119,7 @@ function updateTopicTimestamp(topic, raw) {
             let formattedContent = raw;
 
             try {
-                const jsonObj = JSON.parse(raw);
-                formattedContent = JSON.stringify(jsonObj, null, 2);
+                formattedContent = JSON.stringify(raw, null, 2);
 
             } catch (e) {
                 console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
