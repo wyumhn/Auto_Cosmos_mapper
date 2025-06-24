@@ -70,7 +70,7 @@ function renderTopicList(topics, container, raw) {
     const html = `
         ${sortedTopics.map(topic => `
             <li id="topic-${topic}">
-                <span>${topic}</span><span>${time}</span>
+                <span>${topic}</span><span id="topic-${topic}-time">${time}</span>
                 <a href="#"></a>
                 <div id="topic-${topic}-info" class="modal-box">
                     <button class="close-btn">&times;</button>
@@ -91,14 +91,16 @@ function updateTopicTimestamp(topic, raw) {
     const topicId = `topic-${topic}`;
     const topicElement = document.getElementById(topicId);
 
+    const topicTimeId = `topic-${topic}-time`;
+    const topicTimeElement = document.getElementById(topicTimeId);
+
     const topicRawId = `topic-${topic}-raw`;
     const topicRawElement = document.getElementById(topicRawId);
 
     if (topicElement) {
 
-        const timeElement = topicElement.querySelector('span:last-child');
-        if (timeElement) {
-            timeElement.textContent = getTime();
+        if (topicTimeElement) {
+            topicTimeElement.textContent = getTime();
         }
 
         topicElement.classList.remove('topic-highlight');
@@ -114,7 +116,17 @@ function updateTopicTimestamp(topic, raw) {
     if (topicRawElement) {
         const codeElement = topicRawElement.querySelector('code');
         if (codeElement) {
-            codeElement.textContent = raw;
+            let formattedContent = raw;
+
+            try {
+                const jsonObj = JSON.parse(raw);
+                formattedContent = JSON.stringify(jsonObj, null, 2);
+
+            } catch (e) {
+                console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
+            }
+
+            codeElement.textContent = formattedContent;
             delete codeElement.dataset.highlighted;
             hljs.highlightElement(codeElement);
         }
