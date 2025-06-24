@@ -48,6 +48,7 @@ body, html {
 #grid-wrap-wrap {
     display: grid;
     grid-template-columns: 1fr 2fr 3fr;
+    grid-template-areas: "msg misc image";
     height: 100%;
     width: 100%;
 }
@@ -60,11 +61,17 @@ body, html {
     border-radius: 0.75rem;
 }
 
+#msg-grid {
+    grid-area: msg;
+}
+
 #misc-grid {
+    grid-area: misc;
     grid-template-rows: 3fr 2fr;
 }
 
 #image-grid {
+    grid-area: image;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 }
@@ -443,3 +450,15 @@ body, html {
     animation: flash-green 2s ease-out;
 }
 
+
+/* for smartphone */
+
+@media only screen and (max-width: 800px) {
+    #grid-wrap-wrap {
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "msg misc"
+            "image image";
+    }
+}
