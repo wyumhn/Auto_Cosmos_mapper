@@ -466,7 +466,7 @@ body, html {
 
     body, html {
         margin: 0;
-        height: 200%;
+        height: 150%;
         font-family: "Noto Sans JP", sans-serif;
     }
 
@@ -475,7 +475,7 @@ body, html {
     }
 
     #grid-wrap-wrap {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas:
             "msg misc"
