@@ -75,7 +75,10 @@ function renderTopicList(topics, container, raw) {
                 <div id="topic-${topic}-info" class="modal-box">
                     <button class="close-btn">&times;</button>
                     <h3>${topic}</h3>
-                    <pre id="topic-${topic}-raw"><code class="language-yaml"></code></pre>
+                    <div class="code-container">
+                        <button class="copy-button">コピー</button>
+                        <pre id="topic-${topic}-raw" class="code-container"><code class="language-yaml"></code></pre>
+                    </div>
                 </div>
             </li>
             `).join('')}

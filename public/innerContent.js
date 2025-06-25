@@ -43,5 +43,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // --- コピーボタンの処理
+        if (event.target.classList.contains('copy-button')) {
+            const button = event.target;
+            const container = button.closest('.code-container');
+            if (!container) {
+                console.error('コードブロックコンテナがありません');
+                return;
+            }
+
+            const codeElement = container.querySelector('code');
+            if (!codeElement) {
+                console.error('コードブロックがありません');
+                return;
+            }
+            // クリップボードにコピーするテキストの取得
+            const textToCopy = codeElement.textContent;
+
+            // テキストをコピー
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.classList.add('copied');
+
+                // 2秒後にボタンの表示を元に戻す
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                }, 2000);
+
+            }).catch(err => {
+                console.error('クリップボードへのコピーに失敗しました', err);
+            });
+        }
+
     });
 });

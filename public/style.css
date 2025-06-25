@@ -438,6 +438,32 @@ body, html {
     border: 0.2rem solid #8b8b8b;
 }
 
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 2.7rem;
+    z-index: 1;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.code-container:hover .copy-button {
+    opacity: 1;
+}
+
+/* コピー成功時のスタイル */
+.copy-button.copied {
+    background-color: #28a745;
+    opacity: 1;
+}
+
 @keyframes flash-green {
 
     from {
