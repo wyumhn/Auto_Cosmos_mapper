@@ -5,6 +5,7 @@
 
 .scene-container-container {
     display: flex;
+    height: fit-content;
 }
 
 .scene-container {
@@ -13,11 +14,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    perspective: 1000px; /* 3D効果の遠近感 */
+    perspective: 24rem; /* 3D効果の遠近感 */
     background-color: #222222; /* 背景色 */
     position: relative;
     overflow: hidden;
     border-radius: 0.35rem;
+    height: 9.9rem;
 }
 
 .camera-wrapper {

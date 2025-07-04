@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     socket.on('imu-update', data => {
-        const { roll, pitch, yaw } = data;
-        const cube = document.getElementById('imu-cube');
-        const rollValueDisplay = document.getElementById('rollValue');
-        const pitchValueDisplay = document.getElementById('pitchValue');
-        const yawValueDisplay = document.getElementById('yawValue');
+        const { magnitude, azimuth, elevation } = data.acceleration_spherical;
+        const acceleration = document.getElementById('imu-acceleration-cube');
+        updateCubeRotation(0, elevation, azimuth, acceleration);
 
-        updateCubeRotation(roll, pitch, yaw, cube);
+        const { roll, pitch, yaw } = data.euler_angles;
+        const gradient = document.getElementById('imu-gradient-cube');
+        updateCubeRotation(roll, pitch, yaw, gradient);
     });
     /*
     *

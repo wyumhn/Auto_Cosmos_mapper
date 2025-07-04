@@ -77,7 +77,8 @@ body, html {
 
 #cube-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 #image-grid {
@@ -433,7 +434,7 @@ body, html {
 }
 
 .modal-box code {
-    max-height: 50rem;
+    max-height: 17rem;
     max-width: 23rem;
     overflow: auto;
     font-family: "Roboto Mono", monospace;
