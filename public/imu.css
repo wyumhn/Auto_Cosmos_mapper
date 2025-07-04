@@ -1,0 +1,113 @@
+
+:root {
+    --cube-size: 9.5rem;
+}
+
+.scene-container-container {
+    display: flex;
+}
+
+.scene-container {
+    font-size: 8px;
+    flex-grow: 1; /* 残りのスペースを埋める */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* 3D効果の遠近感 */
+    background-color: #222222; /* 背景色 */
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.35rem;
+}
+
+.camera-wrapper {
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transition: transform 0.05s ease-out;
+    transform: rotateX(-28deg) rotateY(0deg) rotateZ(0deg) translateY(4rem) translateZ(-19rem);
+}
+
+/* 3Dキューブのスタイル */
+.cube-wrapper {
+    width: var(--cube-size);
+    height: var(--cube-size);
+    position: relative;
+    transform-style: preserve-3d; /* 子要素を3D空間に配置 */
+    transform-origin: center center;
+    transition: transform 0.05s ease-out; /* 滑らかな回転のために */
+}
+
+.ground-wrapper {
+    width: var(--cube-size);
+    height: var(--cube-size);
+    position: relative;
+    transform-style: preserve-3d; /* 子要素を3D空間に配置 */
+    transform-origin: center center;
+    transition: transform 0.05s ease-out; /* 滑らかな回転のために */
+}
+
+.face {
+    position: absolute;
+    width: var(--cube-size);
+    height: var(--cube-size);
+    border: 0.2rem solid #FFF5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0.1rem 0.1rem 0.16rem black;
+}
+
+/* 各面の配置 */
+.front  {
+    transform: translateZ(calc(var(--cube-size) / 2));
+    border-bottom: 0.5rem solid rgba(0, 255, 0);
+    border-right: 0.5rem solid rgba(255, 0, 0);
+}
+
+.back   {transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 1.9)); }
+
+.right  {
+    transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 1.9));
+    border-bottom: 0.5rem solid rgba(0, 0, 255);
+    border-left: 0.5rem solid rgba(255, 0, 0);
+}
+.left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 1.9)); }
+
+.top    {
+    transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 1.9));
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 1.9));
+    border-top: 0.5rem solid rgba(0, 255, 0);
+    border-right: 0.5rem solid rgba(0, 0, 255);
+}
+
+.ground {
+    transform: rotateX(-90deg) translateX(-37.5rem) translateY(8rem) translateZ(-17rem);
+    width: 80rem;
+    height: 80rem;
+    background-color: #CCC2;
+    background-image: linear-gradient(#FFF2 0.2rem, transparent 0.2rem), linear-gradient(90deg, #FFF2 0.2rem, transparent 0.2rem);
+    background-size: 3rem 3rem;
+}
+
+.front::before { content: 'Z+'; position: absolute; bottom: 0.3rem; left: 0.3rem; font-size: 1rem; }
+.right::before { content: 'X+'; position: absolute; bottom: 0.3rem; right: 0.3rem; font-size: 1rem; }
+.right::after  { content: 'Y+'; position: absolute; top: 0.3rem; left: 0.3rem; font-size: 1rem; }
+.bottom::before {
+        content: '↗';
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+        width: var(--cube-size);
+        height: var(--cube-size);
+        display: flex;
+        text-align: center;
+        font-size: 7rem;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+}

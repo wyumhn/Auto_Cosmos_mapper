@@ -55,7 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateImage(height, width, encoding, imageData, container);
     });
 
+    socket.on('imu-update', data => {
+        const { roll, pitch, yaw } = data;
+        const cube = document.getElementById('imu-cube');
+        const rollValueDisplay = document.getElementById('rollValue');
+        const pitchValueDisplay = document.getElementById('pitchValue');
+        const yawValueDisplay = document.getElementById('yawValue');
 
+        updateCubeRotation(roll, pitch, yaw, cube);
+    });
     /*
     *
     * GPS情報の更新（マーカーを地図上に追加）

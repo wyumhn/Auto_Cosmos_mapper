@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tomorrow-night-bright.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/imu.css">
 </head>
 <body>
     <div id="body-wrap">
@@ -33,8 +34,61 @@
                     <div id="map">
                     </div>
                 </div>
-                <div id="imu-data" class="grid">
-                    <span class="grid-header">IMU</span>
+                <div id="cube-grid">
+                    <div id="imu-data" class="grid scene-container-container">
+                        <span class="grid-header">IMU</span>
+                        <div class="scene-container">
+                            <div class="camera-wrapper">
+                                <div class="ground-wrapper">
+                                    <div class="ground"></div>
+                                </div>
+                                <div id="imu-cube" class="cube-wrapper" style="transform: rotateX(0deg) rotateY(calc(0deg + 135deg)) rotateZ(0deg);">
+                                    <div class="face front"></div>
+                                    <div class="face back"></div>
+                                    <div class="face right"></div>
+                                    <div class="face left"></div>
+                                    <div class="face top"></div>
+                                    <div class="face bottom"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="velocity-data" class="grid scene-container-container">
+                        <span class="grid-header">Velocity</span>
+                        <div class="scene-container">
+                            <div class="camera-wrapper">
+                                <div class="ground-wrapper">
+                                    <div class="ground"></div>
+                                </div>
+                                <div id="velocity-cube" class="cube-wrapper" style="transform: rotateX(0deg) rotateY(calc(0deg + 135deg)) rotateZ(0deg);">
+                                    <div class="face front"></div>
+                                    <div class="face back"></div>
+                                    <div class="face right"></div>
+                                    <div class="face left"></div>
+                                    <div class="face top"></div>
+                                    <div class="face bottom"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wind-data" class="grid scene-container-container">
+                        <span class="grid-header">Wind-Direction</span>
+                        <div class="scene-container">
+                            <div class="camera-wrapper">
+                                <div class="ground-wrapper">
+                                    <div class="ground"></div>
+                                </div>
+                                <div id="wind-cube" class="cube-wrapper" style="transform: rotateX(0deg) rotateY(calc(0deg + 135deg)) rotateZ(0deg);">
+                                    <div class="face front"></div>
+                                    <div class="face back"></div>
+                                    <div class="face right"></div>
+                                    <div class="face left"></div>
+                                    <div class="face top"></div>
+                                    <div class="face bottom"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="image-grid" class="grid-wrap">
@@ -66,22 +120,6 @@
             </div>
         </div>
     </div>
-    <!--
-    <div id="open-menu">
-        <a href="#side-bar">≡</a>
-    </div>
-    <div id="side-bar">
-        <div id="topic-data">
-        <h3>トピックリスト</h3>
-            <ul id="topic-list">
-            </ul>
-        </div>
-        <div class="monitor-data" id="monitor-data-ssh">
-            <h3>現在の接続</h3>
-            <div id="device_list"></div>
-        </div>
-        <a id="close-menu" href="##"> </a>
-    </div>-->
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-polylinedecorator/1.1.0/leaflet.polylineDecorator.min.js" integrity="sha512-2oK40N5b+8g4Fhp1rfdtmNaroXsh7tFN4OY6++9lB/Hb+uLQWmn0SSAXvnQfbn8BP8qtpri2YQLaFGpyzKUHow==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

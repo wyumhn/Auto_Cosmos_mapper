@@ -167,3 +167,11 @@ function updateImage(height, width, encoding, imageData, container) {
         container.appendChild(imgElement);
     }
 }
+
+function updateCubeRotation(roll, pitch, yaw, cube) {
+    cube.style.transform = `
+        rotateX(${roll}deg)
+        rotateY(calc(${pitch}deg + 135deg))
+        rotateZ(${yaw}deg)
+    `;
+}

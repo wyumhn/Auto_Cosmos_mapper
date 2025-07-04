@@ -52,7 +52,7 @@ body, html {
 
 #grid-wrap-wrap {
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr;
+    grid-template-columns: 3fr 8fr 7fr;
     grid-template-areas: "msg misc image";
     height: 100%;
     width: 100%;
@@ -75,6 +75,11 @@ body, html {
     grid-template-rows: 3fr 2fr;
 }
 
+#cube-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 #image-grid {
     grid-area: image;
     grid-template-columns: 1fr 1fr;
@@ -94,7 +99,7 @@ body, html {
     right: 0;
     z-index: 10;
     background: white;
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 0.3rem;
     border-bottom-left-radius: 1rem;
     border-bottom: 0.16rem solid rgb(180, 180, 180);
     border-left: 0.16rem solid rgb(180, 180, 180);

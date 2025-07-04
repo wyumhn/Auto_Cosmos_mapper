@@ -2,6 +2,7 @@
 const topicToEventMap = {
   '/gps/fix': 'gps-update',
   '/imu/data': 'imu-update',
+  '/filter/quaternion': 'velocity-update',
   '/flir_camera/image_raw': 'flir-camera-update',
   '/image-raw': 'sonar-update',
   '/thermal_image': 'thermal-camera-update',
