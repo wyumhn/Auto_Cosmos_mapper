@@ -4,8 +4,11 @@ const topicToEventMap = {
   '/imu/data': 'imu-update',
   '/filter/quaternion': 'velocity-update',
   '/flir_camera/image_raw': 'flir-camera-update',
+  '/image_color/compressed': 'flir-camera-update',
+  '/image_raw/compressed': 'sonar-update',
   '/image_raw': 'sonar-update',
   '/thermal_image': 'thermal-camera-update',
+  '/thermal_image/compressed': 'thermal-camera-update',
   '/chatter': 'chatter-update',
 };
 
