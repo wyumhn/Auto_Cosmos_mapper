@@ -90,7 +90,7 @@ function addTopicList(topics, container, raw) {
  * @param {string} topic
  */
 
-function updateTopicList(topic, raw, latestTopicData) {
+function topicUpdateHandler(topic, raw, latestTopicData) {
 
     if (raw !== undefined) {
         latestTopicData[topic] = raw;
@@ -118,6 +118,14 @@ function updateTopicList(topic, raw, latestTopicData) {
     topicElement.addEventListener('animationend', () => {
         topicElement.classList.remove('topic-highlight');
     }, { once: true });
+
+    const modal = document.getElementById(`topic-${topic}-info`);
+
+    // モーダルに .is-visible クラスが付いている
+    if (modal && modal.classList.contains('is-visible')) {
+        // もし開いていれば、モーダルの中身もリアルタイムで更新
+        updateModalContent(topic, latestTopicData);
+    }
 }
 
 function updateModalContent(topic, latestTopicData) {
@@ -125,14 +133,14 @@ function updateModalContent(topic, latestTopicData) {
     const codeElement = topicRawElement.querySelector('code');
 
     const rawData = latestTopicData[topic];
-    console.log(latestTopicData);
+
     if (codeElement && rawData !== undefined) {
         let formattedContent = rawData;
         try {
             const jsonObj = (typeof rawData === 'string') ? JSON.parse(rawData) : rawData;
             formattedContent = JSON.stringify(jsonObj, null, 2);
         } catch (e) {
-            console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
+            // console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
         }
 
         codeElement.textContent = formattedContent;

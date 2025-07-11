@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 addTopicList(receivedTopics, topicListElement, raw);
             }
             else {
-                updateTopicList(topic, raw, latestTopicData);
+                topicUpdateHandler(topic, raw, latestTopicData);
             }
         }
     });
