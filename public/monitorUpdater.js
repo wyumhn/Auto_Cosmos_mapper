@@ -59,7 +59,7 @@ function getTime() {
     return time;
 }
 
-function renderTopicList(topics, container, raw) {
+function addTopicList(topics, container, raw) {
     if (!container) {
         console.error("renderTopicList was called with a null container for topics:", topics);
         return;
@@ -90,7 +90,12 @@ function renderTopicList(topics, container, raw) {
  * @param {string} topic
  */
 
-function updateTopicTimestamp(topic, raw) {
+function updateTopicList(topic, raw, latestTopicData) {
+
+    if (raw !== undefined) {
+        latestTopicData[topic] = raw;
+    }
+
     const topicId = `topic-${topic}`;
     const topicElement = document.getElementById(topicId);
 
@@ -100,41 +105,41 @@ function updateTopicTimestamp(topic, raw) {
     const topicRawId = `topic-${topic}-raw`;
     const topicRawElement = document.getElementById(topicRawId);
 
-    if (topicElement) {
+    if (!topicElement) return;
 
-        if (topicTimeElement) {
-            topicTimeElement.textContent = getTime();
-        }
+    if (topicTimeElement) {
+        topicTimeElement.textContent = getTime();
+    }
 
+    topicElement.classList.remove('topic-highlight');
+    void topicElement.offsetWidth;
+    topicElement.classList.add('topic-highlight');
+
+    topicElement.addEventListener('animationend', () => {
         topicElement.classList.remove('topic-highlight');
-        void topicElement.offsetWidth;
-        topicElement.classList.add('topic-highlight');
+    }, { once: true });
+}
 
-        topicElement.addEventListener('animationend', () => {
-            topicElement.classList.remove('topic-highlight');
-        }, { once: true });
+function updateModalContent(topic, latestTopicData) {
+    const topicRawElement = document.getElementById(`topic-${topic}-raw`);
+    const codeElement = topicRawElement.querySelector('code');
 
-    }
-
-    if (topicRawElement) {
-        const codeElement = topicRawElement.querySelector('code');
-        if (codeElement) {
-            let formattedContent = raw;
-
-            try {
-                formattedContent = JSON.stringify(raw, null, 2);
-
-            } catch (e) {
-                console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
-            }
-
-            codeElement.textContent = formattedContent;
-            delete codeElement.dataset.highlighted;
-            hljs.highlightElement(codeElement);
+    const rawData = latestTopicData[topic];
+    console.log(latestTopicData);
+    if (codeElement && rawData !== undefined) {
+        let formattedContent = rawData;
+        try {
+            const jsonObj = (typeof rawData === 'string') ? JSON.parse(rawData) : rawData;
+            formattedContent = JSON.stringify(jsonObj, null, 2);
+        } catch (e) {
+            console.warn("受信データをJSONとして整形できませんでした。そのまま表示します", e);
         }
 
-    }
+        codeElement.textContent = formattedContent;
 
+        delete codeElement.dataset.highlighted;
+        hljs.highlightElement(codeElement);
+    }
 }
 
 function updateImage(height, width, encoding, imageData, container) {

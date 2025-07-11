@@ -1,7 +1,8 @@
+const latestTopicData = {};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const socket = io();
-
     /*
     *
     * トピックリストの更新
@@ -20,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!receivedTopics.has(topic)) {
                 receivedTopics.add(topic);
-                renderTopicList(receivedTopics, topicListElement, raw);
+                addTopicList(receivedTopics, topicListElement, raw);
             }
             else {
-                updateTopicTimestamp(topic, raw);
+                updateTopicList(topic, raw, latestTopicData);
             }
         }
     });

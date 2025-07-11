@@ -26,13 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 対応するモーダルを探して、まだ存在しない場合は新規作成
             let modal = document.getElementById(modalId);
-            if (!modal) {
-                console.warn('対応するモーダルボックスがありませんでした:');
-                return;
-            } else {
-            modal.classList.toggle('is-visible');
+            if (!modal) return;
+
+            if (!modal.classList.contains('is-visible')) {
+                const topicName = listItem.id.replace('topic-', '');
+                updateModalContent(topicName, latestTopicData);
             }
 
+            modal.classList.toggle('is-visible');
         }
 
         // 閉じるボタンの処理
