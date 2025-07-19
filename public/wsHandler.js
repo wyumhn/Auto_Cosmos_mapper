@@ -74,6 +74,69 @@ document.addEventListener('DOMContentLoaded', () => {
         updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
     });
 
+    socket.on('mic1-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic1');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic1-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic1');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic2-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic2');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic3-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic3');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic4-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic4');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic5-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic5');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic6-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic6');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic7-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic7');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
+    socket.on('mic8-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic8');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
     /*
     *
     * GPS情報の更新（マーカーを地図上に追加）
