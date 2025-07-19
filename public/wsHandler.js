@@ -1,3 +1,5 @@
+const { contain } = require("three/src/extras/TextureUtils.js");
+
 const latestTopicData = {};
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,6 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const gradient = document.getElementById('imu-gradient-cube');
         updateCubeRotation(roll, pitch, yaw, gradient);
     });
+
+
+    socket.on('mic1-update', data => {
+        const { data1, data2, data3, data4, data5, data6, data7, data8 } = data;
+        const container = document.getElementById('mic1');
+
+        updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container);
+    });
+
     /*
     *
     * GPS情報の更新（マーカーを地図上に追加）

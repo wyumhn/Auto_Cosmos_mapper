@@ -189,24 +189,21 @@ function updateCubeRotation(roll, pitch, yaw, cube) {
     `;
 }
 
-function updateMic(values, elementId) {
-  // 入力値のバリデーション
-    if (!Array.isArray(values) || values.length !== 8) {
-        console.error("エラー: 'values' は8つの数値を含む配列である必要があります。");
-        return;
+function updateMic(data1, data2, data3, data4, data5, data6, data7, data8, container) {
+    // コンテナ要素の存在を確認
+    if (!container) {
+        console.error("エラー: 'container' 要素が見つかりません。有効なHTMLElementを渡してください。");
+        return; // コンテナがなければ処理を中断
     }
 
-    const micViewer = document.getElementById(elementId);
-    if (!micViewer) {
-        console.error(`エラー: ID '${elementId}' の要素が見つかりません。`);
-        return;
-    }
+    // 渡されたデータを配列にまとめる
+    const values = [data1, data2, data3, data4, data5, data6, data7, data8];
 
-    const graphs = micViewer.querySelectorAll('.mic-graph');
+    const graphs = container.querySelectorAll('.mic-graph');
 
     // 子要素の数が期待通りか確認
     if (graphs.length !== 8) {
-        console.error(`エラー: ID '${elementId}' の要素内に '.mic-graph' クラスを持つ子要素が8つ見つかりません。`);
+        console.error(`エラー: 指定されたコンテナ内に '.mic-graph' クラスを持つ子要素が8つ見つかりません。見つかった数: ${graphs.length}`);
         return;
     }
 
@@ -214,8 +211,7 @@ function updateMic(values, elementId) {
         // 値が -1.0 から 1.0 の範囲内にあるか確認
         if (typeof value !== 'number' || value < -1.0 || value > 1.0) {
             console.warn(`警告: インデックス ${index} の値 (${value}) は -1.0 から 1.0 の範囲外です。`);
-            // 範囲外の場合は、最も近い有効な値にクランプするなどの処理も検討できますが、
-            // 今回はそのまま絶対値を取ります。
+            // 範囲外の場合でも、絶対値は計算されます
         }
 
         const heightInRem = Math.abs(value); // 絶対値を取得
