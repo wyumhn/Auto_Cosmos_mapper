@@ -1,5 +1,3 @@
-const { contain } = require("three/src/extras/TextureUtils.js");
-
 const latestTopicData = {};
 
 document.addEventListener('DOMContentLoaded', () => {
