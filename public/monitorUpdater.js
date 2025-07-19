@@ -188,3 +188,37 @@ function updateCubeRotation(roll, pitch, yaw, cube) {
         rotateZ(${yaw}deg)
     `;
 }
+
+function updateMic(values, elementId) {
+  // 入力値のバリデーション
+    if (!Array.isArray(values) || values.length !== 8) {
+        console.error("エラー: 'values' は8つの数値を含む配列である必要があります。");
+        return;
+    }
+
+    const micViewer = document.getElementById(elementId);
+    if (!micViewer) {
+        console.error(`エラー: ID '${elementId}' の要素が見つかりません。`);
+        return;
+    }
+
+    const graphs = micViewer.querySelectorAll('.mic-graph');
+
+    // 子要素の数が期待通りか確認
+    if (graphs.length !== 8) {
+        console.error(`エラー: ID '${elementId}' の要素内に '.mic-graph' クラスを持つ子要素が8つ見つかりません。`);
+        return;
+    }
+
+    values.forEach((value, index) => {
+        // 値が -1.0 から 1.0 の範囲内にあるか確認
+        if (typeof value !== 'number' || value < -1.0 || value > 1.0) {
+            console.warn(`警告: インデックス ${index} の値 (${value}) は -1.0 から 1.0 の範囲外です。`);
+            // 範囲外の場合は、最も近い有効な値にクランプするなどの処理も検討できますが、
+            // 今回はそのまま絶対値を取ります。
+        }
+
+        const heightInRem = Math.abs(value); // 絶対値を取得
+        graphs[index].style.height = `${heightInRem}rem`;
+    });
+}

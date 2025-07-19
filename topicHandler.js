@@ -1,10 +1,13 @@
 
 const topicToEventMap = {
   '/gps/fix': 'gps-update',
+  '/wamv/sensors/gps/gps/fix': 'gps-update',
   '/imu/data': 'imu-update',
+  '/wamv/sensors/imu/imu/data': 'imu-update',
   '/filter/quaternion': 'velocity-update',
   '/flir_camera/image_raw': 'flir-camera-update',
   '/image_color/compressed': 'flir-camera-update',
+  '/wamv/sensors/cameras/front_left_camera_sensor/image_raw': 'flir-camera-update',
   '/image_raw/compressed': 'sonar-update',
   '/image_raw': 'sonar-update',
   '/mic1/audio/compressed': 'mic1-update',
